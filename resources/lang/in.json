@@ -1,0 +1,12 @@
+{
+    "Login": "लॉग इन करें",
+    "E-Mail Address": "ईमेल पता",
+    "Remember Me": "मुझे याद रखना",
+    "Register": "रजिस्टर",
+    "Forgot Your Password?": "क्या आप पासवर्ड भूल गए?",
+    "Password": "पारण शब्द",
+	"welcome" : "स्वागत हे, :name",
+	"Dashboard" : "डैशबोर्ड",
+	"You are logged in!" : "आप लोग्ड इन हो चुके हैं!",
+	"Name":"नाम"
+}
