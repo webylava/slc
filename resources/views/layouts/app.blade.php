@@ -8,12 +8,15 @@
 		<link rel="shortcut icon" href="{{ url('/') }}/images/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="{{ url('/') }}/images/favicon.ico" type="image/x-icon">
 		<!-- Fonts -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 		<!-- Styles -->
 		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		@stack('app-css')
-		<link rel="stylesheet" href="{{ asset('css/media.css') }}">
+		<!--<link rel="stylesheet" href="{{ asset('css/media.css') }}">-->
 	</head>
     <body class="font-sans antialiased">
         <div class="flex-col bg-gray-800 w-full md:flex md:flex-row md:min-h-screen">

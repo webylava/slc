@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Usermeta extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name', 'iso', 'code'];
+	protected $fillable = [
+        'user_id', 'key', 'value'
+    ];
 }

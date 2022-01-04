@@ -14,9 +14,9 @@ return[
 		'in'	=>	'Hindi',
 	],
 	'currency'	=>	[
-		'gbp'	=>	'GBP',
-		'usd'	=>	'USD',
-		'aud'	=>	'AUD',
-		'cad'	=>	'CAD'
+		'gbp'	=>	'£ | GBP',
+		'usd'	=>	'$ | USD',
+		'aud'	=>	'$ | AUD',
+		'cad'	=>	'$ | CAD'
 	],
 ];

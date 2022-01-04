@@ -112,6 +112,15 @@ class SettingController extends Controller
 					'logo'  	=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 				];
 			}
+			if(!empty($request->input('uplodedfavicon')) && is_null($request->favicon)){
+				$validateFavicon = [
+					'favicon'  	=> 'string'                    
+				];
+			}else{
+				$validateFavicon = [
+					'favicon'  	=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+				];
+			}
 			
 			$validateArray = [
 				'site_name'     	=> 'required',
@@ -124,6 +133,7 @@ class SettingController extends Controller
 			];
 			
 			$validatedData = $request->validate(array_merge($validateLogo,$validateArray));
+			$validatedData = $request->validate(array_merge($validateFavicon,$validateArray));
 			$year 	= date("Y");
 			$month 	= date("m");
 		   // dd($request->logo->getClientOriginalExtension());
@@ -140,13 +150,29 @@ class SettingController extends Controller
 				$logourl    = $request->input('uplodedlogo');
 				
 			}
-			
+			if(!empty($request->input('uplodedfavicon')) && !is_null($request->favicon)){
+				echo "helo";
+				dd($faviconurl);
+				$favicon 	    = time().'.'.$request->favicon->getClientOriginalExtension();
+				$faviconurl    	= url('/')."/$year/$month/".$favicon;
+				$directory 		= public_path()."/$year/$month/";
+				if (!file_exists($directory)) {
+					FIle::makeDirectory($directory,0755, true);
+				}
+				
+				$request->favicon->move($directory, $favicon);
+			}else{
+				$faviconurl    = $request->input('uplodedfavicon');
+				
+			}
+			dd($faviconurl);
 			Setting::updateOrCreate([
 					'key' 	=> 'global',
 				],
 				[
 				'value' => json_encode([
 							'logo' 		    	=> $logourl,
+							'favicon' 		    => $faviconurl,
 							'site_name' 		=> $request->input('site_name'),
 							'default_email' 	=> $request->input('default_email'),
 							'pagination' 		=> $request->input('pagination'),
@@ -210,6 +236,83 @@ class SettingController extends Controller
 		
 		return view('settings.payment', ['payment' => $payment]);
 	}
-    
+	
+	public function tax(Setting $setting, Request $request)
+	{
+		if ($request->isMethod('post')) {
+			
+			$validatedData = $request->validate([
+				'tax_name' 		=> 'required',
+				'percentage' 	=> 'required',
+			]);
+			
+			Setting::updateOrCreate([
+					'key' 	=> 'tax',
+				],
+				[
+				'value' => json_encode([
+							'tax_name' 		=> $request->input('tax_name'),
+							'percentage' 	=> $request->input('percentage'),
+							'status' 		=> $request->input('status')?? 'inactive',
+						]
+				)]
+			);
+		
+			
+			
+			return redirect('settings/tax')->with('success', 'Tax setting saved successfully!');
+		}
+		
+		$tax = Setting::where('key','=','tax')->first();
+		if($tax != null)
+			$tax->value = json_decode($tax->value);
+		
+		return view('settings.tax', ['tax' => $tax]);
+	}
+	
+	public function business(Setting $setting, Request $request)
+	{
+		if ($request->isMethod('post')) {
+			
+			$validatedData = $request->validate([
+				'business_name' => 'required',
+				'email' 		=> 'required|email',
+				'taxt_info' 	=> 'required',
+				'phone' 		=> 'required',
+				'address' 		=> 'required',
+				'city' 			=> 'required',
+				'state' 		=> 'required',
+				'country' 		=> 'required',
+			]);
+			
+			Setting::updateOrCreate([
+					'key' 	=> 'business',
+				],
+				[
+				'value' => json_encode([
+							'business_name' => $request->input('business_name'),
+							'email' 		=> $request->input('email'),
+							'taxt_info' 	=> $request->input('taxt_info'),
+							'phone' 		=> $request->input('phone'),
+							'address' 		=> $request->input('address'),
+							'city' 			=> $request->input('city'),
+							'state' 		=> $request->input('state'),
+							'country' 		=> $request->input('country'),
+						]
+				)]
+			);
+		
+			
+			
+			return redirect('settings/business')->with('success', 'Business setting saved successfully!');
+		}
+		
+		$business = Setting::where('key','=','business')->first();
+		if($business != null)
+			$business->value = json_decode($business->value);
+		//dd($business);
+		return view('settings.business', ['business' => $business]);
+	}
+	
     
 }

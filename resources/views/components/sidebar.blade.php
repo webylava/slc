@@ -15,26 +15,42 @@
         </span>
         <span class="ml-2 text-sm tracking-wide truncate">Dashboard</span>
         </a>
-        <a href="{{ url('users') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
-        <span class="inline-flex justify-center items-center ml-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+		<a href="{{ url('sales') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+		<span class="inline-flex justify-center items-center ml-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+			</svg>
         </span>
-        <span class="ml-2 text-sm tracking-wide truncate">Users</span>
+        <span class="ml-2 text-sm tracking-wide truncate">Sales</span>
         </a>
-        <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+		<a href="{{ url('clients') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+		<span class="inline-flex justify-center items-center ml-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+			</svg>
+		</span>
+		<span class="ml-2 text-sm tracking-wide truncate">Clients</span>
+		</a>
+		<a href="{{ url('products') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+		<span class="inline-flex justify-center items-center ml-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+			<path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+			<path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+			</svg>
+		</span>
+		<span class="ml-2 text-sm tracking-wide truncate">Products</span>
+		</a>
+		
+        <a href="{{ url('companies') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
         <span class="inline-flex justify-center items-center ml-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+			</svg>
+
         </span>
-        <span class="ml-2 text-sm tracking-wide truncate">Portfolio</span>
+        <span class="ml-2 text-sm tracking-wide truncate">Companies</span>
         </a>
-        <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-400 dark:hover:bg-gray-600 text-white-600 hover:text-white border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
-        <span class="inline-flex justify-center items-center ml-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-        </span>
-        <span class="ml-2 text-sm tracking-wide truncate">Portfolio</span>
-        </a>
+        
         <div class="px-5 hidden md:block">
                 <div class="flex flex-row items-center mt-5 h-8">
                         <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>

@@ -47,7 +47,6 @@
 							</div>
 						</a>
 						<!-- Card -->
-						<!-- Card -->
 						<a href="{{ url('settings/users') }}">
 							<div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
 								<div class="p-3 mr-4 text-orange-500 bg-blue-400 rounded-full dark:text-orange-100 dark:bg-orange-500">

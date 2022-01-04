@@ -26,7 +26,7 @@
 											<!-- toggle -->
 											<div class="relative">
 												<!-- input -->
-												<input type="checkbox" name="paypal_enable" value="yes" id="appToggle" {{ ('yes' == $payment->value->paypal_enable) ? 'checked="checked"' : '' }} class="sr-only">
+												<input type="checkbox" name="paypal_enable" onclick="this.value = (this.checked)?'yes':'no';" value="yes" id="appToggle" {{ ('yes' == $payment->value->paypal_enable) ? 'checked="checked"' : '' }} class="sr-only">
 												<!-- line -->
 												<div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
 												<!-- dot -->
@@ -44,7 +44,7 @@
 											<!-- toggle -->
 											<div class="relative">
 												<!-- input -->
-												<input type="checkbox"  {{ ('live' == $payment->value->mode) ? 'checked="checked"' : '' }}  name="mode" value="live" id="modeOfPaypal" class="sr-only">
+												<input type="checkbox" onclick="this.value = (this.checked)?'live':'staging';"   {{ ('live' == $payment->value->mode) ? 'checked="checked"' : '' }}  name="mode" value="live" id="modeOfPaypal" class="sr-only">
 												<!-- line -->
 												<div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
 												<!-- dot -->

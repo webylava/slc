@@ -2,6 +2,14 @@
 	@section('breadcrumb') 
 		@parent
 		<li class="flex items-center">
+			<a href="{{ url('settings')}} ">Settings</a>
+			<svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+		</li>
+		<li class="flex items-center">
+			<a href="{{ url('settings/users')}} ">Admin Users</a>
+			<svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+		</li>
+		<li class="flex items-center">
 			<a href="{{ url('users')}} ">Users</a>
 			<svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
 		</li>
@@ -15,14 +23,47 @@
 			<div class="grid  gap-8 grid-cols-1">
 				<div class="flex flex-col ">
 					<div class="mt-5">
-						<form method="POST" action="{{ route('users.create') }}" enctype="multipart/form-data">
+						<form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
 							@csrf
+							<input type="hidden" value="user" name="usertype">
+							<div class="md:flex flex-row md:space-x-4 w-full text-xs">
+								@hasanyrole('developer|admin')
+								<div class="md:flex flex-row md:space-x-4 w-full text-xs">
+									<div class="mb-3 space-y-2 w-full text-xs">
+										<x-label for="role" :value="__('Select role')" />
+										<select id="role" name="role" class="w-full">
+										<option value="">--- Select role ---</option>
+										@foreach ($roles as $key => $value)
+										<option value="{{ $key }}" {{ old('roles') == $key ? 'selected' : ''}}>{{ $value }}</option>
+										@endforeach
+										</select>
+									</div>
+								</div>
+								@endhasanyrole
+								<div class="mb-3 space-y-2 w-full text-xs">
+									<x-label for="first_name" :value="__('First Name')" />
+									<x-input id="first_name" placeholder="First name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name') ?? $user->first_name ?? old('first_name')" required autofocus />
+								</div>
+								<div class="mb-3 space-y-2 w-full text-xs">
+									<x-label for="last_name" :value="__('Last Name')" />
+									<x-input id="last_name" placeholder="Last name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name') ?? $user->last_name ?? old('last_name')" required autofocus />
+								</div>									
+							</div>
 							<div class="md:flex flex-row md:space-x-4 w-full text-xs">
 								<div class="mb-3 space-y-2 w-full text-xs">
-									<x-label for="name" :asterisk="true" :value="__('Name')" />
-									<x-input id="name" placeholder="Role Name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+									
+									<x-label for="password" :value="__('Password')" />
+									<x-input id="password" placeholder="Password" class="block mt-1 w-full" type="text" name="password" :value="old('password') ?? $user->password ?? old('password')" required autofocus />
+									<div onclick="makeid(10)" class="inline-block bg-indigo-500 px-3 py-1 text-white text-center font-extrabold rounded-full text-xs font-normal">Generate</div>
+
+								</div>							
+								<div class="mb-3 space-y-2 w-full text-xs">
+									<x-label for="email" :value="__('Email')" />
+									<x-input id="email" placeholder="Email" class="block mt-1 w-full" type="text" name="email" :value="old('email') ?? $user->email ?? old('email')"  required autofocus />
 								</div>
+								
 							</div>
+
 							<p class="text-xs text-red-500 text-right my-3">Required fields are marked with an asterisk <abbr title="Required field">*</abbr></p>
 							<div class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
 								<button class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"> Cancel </button>
@@ -32,5 +73,20 @@
 					</div>
 				</div>
 			</div>
+			@push('app-js')
+			<script type="text/javascript">
+				function makeid(length){
+					var result           = '';
+					var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij!@^&klmnopqrstuvwxyz0123456789';
+					var charactersLength = characters.length;
+					for ( var i = 0; i < length; i++ ) {
+						result += characters.charAt(Math.floor(Math.random() * charactersLength));
+					}
+					document.getElementById('password').value= result;
+					return true;
+				}
+			</script>
+			@endpush
+
 		</div>
 </x-app-layout>
