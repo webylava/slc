@@ -9,9 +9,9 @@
 		<a href="javascript:void();" class="text-gray-500" aria-current="page">Business Settings</a>
 		</li>
 	@endsection 
-	<div class="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-12 px-8 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center">
+	<div class="relative min-h-screen flex items-start justify-center bg-center bg-gray-50 py-9 px-9 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover">
 		<div class="absolute bg-black opacity-60 inset-0 z-0"></div>
-		<div class="max-w-full w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+		<div class="max-w-full w-full space-y-8 p-10 bg-white rounded-lg shadow-lg z-10">
 			<div class="grid  gap-8 grid-cols-1">
 				<div class="flex flex-col ">
 					<div class="mt-5">

@@ -17,7 +17,9 @@ class SaleController extends Controller
     public function index()
     {
         //
-		return view('sales.index');
+		$items 		= env('APP_PAGINATE',15);
+        $sales 	= Sale::latest()->paginate($items);
+		return view('sales.index', ['sales' => $sales]);
     }
 
     /**
@@ -28,10 +30,9 @@ class SaleController extends Controller
     public function create()
     {
         //
-		$companies	= Company::select(['id','name'])->get();
 		$clients	= User::role('client')->get();
 		
-		return view('sales.create',['companies' => $companies, 'clients' => $clients]);
+		return view('sales.create',['clients' => $clients]);
     }
 
     /**
@@ -43,6 +44,18 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         //
+		
+		$request->validate(
+					[
+						'title' 	=> 'required|max:200',
+						'user_id' 	=> 'required',
+					]);
+					
+		$request->request->add(['invoice_no' => $this->genrateInvoiceNumber()]);
+		$request->request->add(['invoice_date' => date('Y-m-d')]);
+		$request->request->add(['type' => 'invoice']);
+        $sale	= Sale::create($request->all());
+        return redirect()->to('sales/'.$sale->id.'/edit')->with('success','Invoice drafted successfully.');
     }
 
     /**
@@ -65,6 +78,7 @@ class SaleController extends Controller
     public function edit(Sale $sale)
     {
         //
+		return view('sales.edit',compact('sale'));
     }
 
     /**
@@ -89,4 +103,28 @@ class SaleController extends Controller
     {
         //
     }
+	
+	public function all(Sale $sale)
+    {
+		$items 	= env('APP_PAGINATE',15);
+        $sales 	= Sale::latest()->paginate($items);
+		
+		return view('sales.all', ['sales' => $sales]);
+    }
+	
+	private function genrateInvoiceNumber(){
+		$record = Sale::latest()->first();
+		
+
+		//check first day in a year
+		if ( is_null($record) ){
+			$nextInvoiceNumber = "SLM".date('Y').'-1';
+		} else {
+			//increase 1 with last invoice number
+			$expNum = explode('-', $record->invoice_no);
+			$nextInvoiceNumber = $expNum[0].'-'. $expNum[1]+1;
+		}
+		//dd($nextInvoiceNumber);
+		return $nextInvoiceNumber;
+	}
 }

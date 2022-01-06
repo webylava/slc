@@ -2,7 +2,7 @@
 	@section('breadcrumb') 
 		@parent
 		<li class="flex items-center">
-			<a href="{{ url('clients')}} ">{{ __('Users') }}</a>
+			<a href="{{ url('sales')}} ">{{ __('Sales') }}</a>
 			<svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
 		</li>
 		<li>
@@ -18,11 +18,11 @@
 				<div class="bg-gray-800 text-white">
 					<div class="flex flex-wrap items-center px-4 py-3">
 						<div class="relative w-full max-w-full flex-grow flex-1">
-						  <h3 class="font-semibold text-base text-white dark:text-gray-50">All users</h3>
+						  <h3 class="font-semibold text-base text-white dark:text-gray-50">All sales</h3>
 						</div>
 						<div class="relative w-full max-w-full flex-grow flex-1 text-right">
 						@hasanyrole('developer|admin')
-						<a href="{{ url('users/create') }}" class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Add</a>
+						<a href="{{ url('sales/create') }}" class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Add</a>
 						@endhasanyrole
 						</div>
 					</div>
@@ -31,37 +31,25 @@
 				<thead>
 				  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 					<th class="px-4 py-3">ID</th>
-					<th class="px-4 py-3">Name</th>
-					<th class="px-4 py-3">Company Name</th>
-					<th class="px-4 py-3">Key phrases</th>
-					<th class="px-4 py-3">Address</th>
+					<th class="px-4 py-3">Client Name</th>
+					<th class="px-4 py-3">Invoice ID</th>
+					<th class="px-4 py-3">Status</th>
+					<th class="px-4 py-3">Type</th>
 					<th class="px-4 py-3">Action</th>
 				  </tr>
 				</thead>
 				<tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-				  @if (count($users) > 0)
-				  @foreach ($users as $company)
+				  @if (count($sales) > 0)
+				  @foreach ($sales as $sale)
 				  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-					<td class="px-4 py-3 text-sm">{{ $company->id }}</td>
-					<td class="px-4 py-3 text-sm">{{ $company->name }}</td>
-					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'company_name') {{ $meta->value }} @endif
-						@endforeach
-					</td>
-					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'key_phrases') {{ $meta->value }} @endif
-						@endforeach
-					</td>
-					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'registered_address') {{ $meta->value }} @endif
-						@endforeach
-					</td>
+					<td class="px-4 py-3 text-sm">{{ $sale->id }}</td>
+					<td class="px-4 py-3 text-sm">{{ $sale->user->name }}</td>
+					<td class="px-4 py-3 text-sm"> <span class="font-bold rounded-full py-1 px-6 text-black bg-yellow-400">{{ $sale->invoice_no }}</span></td>
+					<td class="px-4 py-3 text-sm">{{ $sale->status }}</td>
+					<td class="px-4 py-3 text-sm">{{ $sale->type }}</td>
 					<td class="px-4 py-3">
 					  <div class="flex items-center space-x-4 text-sm">
-						<a href="{{ route('users.edit',$company->id) }}" class="flex items-center justify-between  py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+						<a href="{{ route('sales.edit',$sale->id) }}" class="flex items-center justify-between  py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
 						  <svg
 							class="w-5 h-5"
 							aria-hidden="true"
@@ -73,7 +61,7 @@
 							></path>
 						  </svg>
 						</a>
-						<form action="{{ route('users.destroy',$company->id) }}" method="POST" class="d-inline single_form">
+						<form action="{{ route('sales.destroy',$sale->id) }}" method="POST" class="d-inline single_form">
 						@csrf
 						@method('DELETE')
 						<button onclick="return confirm('Are you sure you want to delete this item?');"
@@ -107,7 +95,7 @@
 			  </table>
 			</div>
 			<div class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-			  {{ $users->links() }}
+			  {{ $sales->links() }}
 			</div>
 		  </div>
 		</div>

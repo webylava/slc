@@ -45,7 +45,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('companies', App\Http\Controllers\CompanyController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
+	
+	Route::get('/sales/all', [App\Http\Controllers\SaleController::class, 'all'])->name('sales.all');
     Route::resource('sales', App\Http\Controllers\SaleController::class);
+	
 	Route::get('/products/all', [App\Http\Controllers\ProductController::class, 'all'])->name('products.all');
     Route::resource('products', App\Http\Controllers\ProductController::class);
 	//Route::resource('roles.permissions', App\Http\Controllers\RoleController::class);

@@ -27,7 +27,7 @@
 							</div>
 						</a>
 						<!-- Card -->
-						<a href="{{ url('users/all') }}">
+						<a href="{{ url('users/all/client') }}">
 							<div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
 								<div class="p-3 mr-4 text-orange-500 bg-blue-400 rounded-full dark:text-orange-100 dark:bg-orange-500">
 									<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

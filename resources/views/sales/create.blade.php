@@ -9,23 +9,41 @@
 		<a href="javascript:void();" class="text-gray-500" aria-current="page">Create</a>
 		</li>
 	@endsection 
-	<div class="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-12 px-8 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center">
+	<div class="relative min-h-screen flex items-start justify-center bg-center bg-gray-50 py-9 px-9 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover">
 		<div class="absolute bg-black opacity-60 inset-0 z-0"></div>
-		<div class="max-w-full w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+		<div class="max-w-full w-full space-y-8 p-10 bg-white rounded-lg shadow-lg z-10">
 			<div class="grid  gap-8 grid-cols-1">
 				<div class="flex flex-col ">
 					<div class="mt-5">
-						<form method="POST" action="{{ route('sales.create') }}" enctype="multipart/form-data">
+						<form method="POST" action="{{ route('sales.store') }}" enctype="multipart/form-data">
 							@csrf
 							<div class="md:flex flex-row md:space-x-4 w-full text-xs">
+							
+								
 								<div class="mb-3 space-y-2 w-full text-xs">
-									<x-label for="client" :value="__('Select client')" />
-									<select id="client" name="client" class="w-full">
+									<x-label for="title" :asterisk="true" :value="__('Invoice Title')" />
+									<x-input id="title" placeholder="Invoice title" class="block mt-1 w-full" type="text" name="title" required autofocus />
+								</div>
+								<div class="mb-3 space-y-2 w-full text-xs">
+									<x-label for="user_id" :asterisk="true" :value="__('Select Client')" />
+									<select id="user_id" name="user_id" class="w-full">
 									<option value="">--- Select client ---</option>
 									@foreach ($clients as $key => $value)
-									<option value="{{ $value->id }}" {{ old('client') == $key ? 'selected' : ''}}>{{ $value->name }}</option>
+									<option value="{{ $value->id }}" >{{ $value->name }}</option>
 									@endforeach
 									</select>
+								</div>
+							</div>
+							<div class="md:flex flex-row md:space-x-4 w-full text-xs">
+								<div class="mb-0 space-y-1 w-full text-xs">
+									<div class="mb-0 space-y-1 w-full text-right text-xs">
+									<a
+									  class="inline-flex justify-end px-3 py-0 text-sm font-light leading-2 text-white transition-colors duration-150 bg-gray-600 border border-transparent active:bg-gray-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
+									  href="{{ url('users/create', 'client') }}"
+									>								  
+									  <span>Add new client &RightArrow;</span>
+									</a>
+								</div>
 								</div>
 							</div>
 							

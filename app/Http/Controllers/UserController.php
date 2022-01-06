@@ -72,6 +72,8 @@ class UserController extends Controller
 		$user->assignRole($role);
 		Usermeta::insert([
 			['user_id' => $user->id, 'key' => 'company_name', 'value' => $request->input('company_name')],
+			['user_id' => $user->id, 'key' => 'website', 'value' => $request->input('website')],
+			['user_id' => $user->id, 'key' => 'phone', 'value' => $request->input('phone')],
 			['user_id' => $user->id, 'key' => 'key_phrases', 'value' => $request->input('key_phrases')],
 			['user_id' => $user->id, 'key' => 'address', 'value' => $request->input('address')],
 			['user_id' => $user->id, 'key' => 'nameoncard', 'value' => $request->input('nameoncard')],
@@ -136,6 +138,7 @@ class UserController extends Controller
 		$items 	= env('APP_PAGINATE',15);
 		if($type == 'client'){
 			$users = User::role('client')->paginate($items); 
+			//$users = User::role('client')->with('metas')->paginate($items); 
 			return view('users.allclients', ['users' => $users]);
 		}else{
 			$users 	= User::latest()->paginate($items);

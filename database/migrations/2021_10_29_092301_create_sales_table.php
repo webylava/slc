@@ -16,10 +16,10 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedBigInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
-			$table->unsignedInteger('company_id');
-			$table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');;
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('invoice_no', 15)->unique();
+			$table->string('title', 200);
+			$table->enum('type', ['invoice', 'quote']); 
             $table->date('invoice_date');
             $table->date('due_date');
             $table->string('reference_number', 35);
@@ -31,7 +31,8 @@ class CreateSalesTable extends Migration
             $table->text('details');
             $table->text('notes');
             $table->text('self_memo');
-			$table->enum('status', ['sent', 'paid', 'overdue', 'void', 'writeoff', 'draft']); 
+			$table->enum('status', ['sent', 'paid', 'overdue', 'void', 'writeoff', 'draft'])->default('draft');; 
+			
             $table->timestamps();
         });
     }

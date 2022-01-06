@@ -11,4 +11,9 @@ class Usermeta extends Model
 	protected $fillable = [
         'user_id', 'key', 'value'
     ];
+	
+	public function meta()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
