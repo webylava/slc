@@ -46,6 +46,12 @@ class User extends Authenticatable
 	
 	public function metas()
     {
+		
         return $this->hasMany(Usermeta::class);
+    }
+	
+	public function getmeta($key)
+    { 
+        return Usermeta::where( 'user_id' , $this->id)->where('key', $key)->value('value');
     }
 }

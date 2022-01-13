@@ -23,16 +23,15 @@ class CreateSalesTable extends Migration
             $table->date('invoice_date');
             $table->date('due_date');
             $table->string('reference_number', 35);
-            $table->string('website', 100);
+            $table->string('paid', 10);
+            $table->string('balance', 10);
 			$table->float('discount', 3, 2);
 			$table->enum('recurring', ['yes', 'no']);
             $table->string('attachments', 255);
-			$table->integer('creator_id');
             $table->text('details');
             $table->text('notes');
             $table->text('self_memo');
-			$table->enum('status', ['sent', 'paid', 'overdue', 'void', 'writeoff', 'draft'])->default('draft');; 
-			
+			$table->enum('status', ['sent', 'paid', 'overdue', 'void', 'writeoff', 'draft'])->default('draft');	
             $table->timestamps();
         });
     }

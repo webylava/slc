@@ -45,19 +45,13 @@
 					<td class="px-4 py-3 text-sm">{{ $company->id }}</td>
 					<td class="px-4 py-3 text-sm">{{ $company->name }}</td>
 					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'company_name') {{ $meta->value }} @endif
-						@endforeach
+						{{ $company->getmeta('company_name') }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'key_phrases') {{ $meta->value }} @endif
-						@endforeach
+						{{ $company->getmeta('key_phrases') }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						@foreach ($company->metas as $meta)
-						@if($meta->key == 'registered_address') {{ $meta->value }} @endif
-						@endforeach
+						{{ $company->getmeta('registered_address') }}
 					</td>
 					<td class="px-4 py-3">
 					  <div class="flex items-center space-x-4 text-sm">

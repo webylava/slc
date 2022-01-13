@@ -14,6 +14,7 @@ class Usermeta extends Model
 	
 	public function meta()
     {
+		
         return $this->belongsTo(User::class);
     }
 }

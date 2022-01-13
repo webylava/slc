@@ -17,7 +17,7 @@ class SaleController extends Controller
     public function index()
     {
         //
-		$items 		= env('APP_PAGINATE',15);
+		$items 	= env('APP_PAGINATE',15);
         $sales 	= Sale::latest()->paginate($items);
 		return view('sales.index', ['sales' => $sales]);
     }
@@ -91,6 +91,7 @@ class SaleController extends Controller
     public function update(Request $request, Sale $sale)
     {
         //
+		dd($request);
     }
 
     /**

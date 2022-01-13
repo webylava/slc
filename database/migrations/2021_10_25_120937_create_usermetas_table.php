@@ -16,7 +16,7 @@ class CreateUsermetasTable extends Migration
         Schema::create('usermetas', function (Blueprint $table) {
             $table->id();
 			$table->unsignedBigInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('key', 100);
             $table->text('value');
             $table->timestamps(); 
